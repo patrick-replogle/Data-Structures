@@ -9,6 +9,13 @@ return elements in First In First Out order.
    Make sure the Queue tests pass.
 3. What is the difference between using an array vs. a linked list when 
    implementing a Queue?
+
+   While arrays can pop or push to the end of the list in constant time, removing or adding
+   to the start of the list requires an entire re-indexing of the list is linear operation. 
+   A singly linked list on the hand excels at adding or removing for the start of a list 
+   because the number of operations is the same no matter how large the list. Therefore a 
+   singly linked list would be a better use for queue since it can perform all the operations
+   of a queue in 0(1) constant time.
    
 Stretch: What if you could only use instances of your Stack class to implement the Queue?
          What would that look like? How many Stacks would you need? Try it!
