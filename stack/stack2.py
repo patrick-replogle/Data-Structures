@@ -1,7 +1,5 @@
-# Implementation of a stack using an array for data storage
-
-
 class Stack:
+    # Implementation of a stack using an array for data storage
     def __init__(self):
         self.size = 0
         self.storage = []
@@ -23,7 +21,8 @@ class Stack:
 
     def clear(self):
         self.size = 0
-        return self.storage.clear()
+        self.storage.clear()
+        return self.storage
 
     def peek(self):
         if self.size > 0:

@@ -9,6 +9,15 @@ return elements in Last In First Out order.
    Make sure the Stack tests pass.
 3. What is the difference between using an array vs. a linked list when 
    implementing a Stack?
+
+   An array is far more efficient at implementing a stack since it can both push and 
+   pop in constant time. While a singly linked list can easily push a new value to the 
+   list, in order to pop from the end you must also have access to the previous node 
+   in order to reset the tail and cut it's link to the removed tail. This requires 
+   looping thru the list and also further adding space complexity by storing 
+   the current.node and previous node in memory while looping.  Therefore popping is 
+   a linear action and has an O(n) time complexity, making the array a better choice 
+   for a stack.
 """
 
 
@@ -18,8 +27,8 @@ class Node:
         self.next_node = None
 
 
-# Implementation of a stack using a singly linked list for data storage
 class Stack:
+    # Implementation of a stack using a singly linked list for data storage
     def __init__(self):
         self.head = None
         self.tail = None
@@ -37,18 +46,19 @@ class Stack:
             self.tail.next_node = new_node
             self.tail = new_node
         self.size += 1
+        return self.tail.value
 
     def pop(self):
         if self.head is None and self.tail is None:
             return None
 
-        if self.size == 1:
+        elif self.size == 1:
             removed_node = self.tail
             self.head = None
             self.tail = None
             self.size = 0
-            removed_node.next_node = None
             return removed_node.value
+
         else:
             previous_node = None
             current_node = self.head
@@ -77,40 +87,10 @@ class Stack:
 
 
 stack = Stack()
-stack.push(1)
+print(stack.push(1))
 stack.push(2)
 stack.push(3)
 stack.push(4)
 stack.push(5)
 stack.pop()
 print(stack.peek())
-
-# Implementation of a stack using an array for data storage
-# class Stack:
-#     def __init__(self):
-#         self.size = 0
-#         self.storage = []
-
-#     def __len__(self):
-#         return self.size
-
-#     def push(self, value):
-#         self.size += 1
-#         return self.storage.append(value)
-
-#     def pop(self):
-#         if self.size > 0:
-#             self.size -= 1
-#             return self.storage.pop(len(self.storage) - 1)
-#         else:
-#             return None
-
-#     def clear(self):
-#         self.size = 0
-#         return self.storage.clear()
-
-#     def peek(self):
-#         if self.size > 0:
-#             return self.storage[len(self.storage) - 1]
-#         else:
-#             return None
