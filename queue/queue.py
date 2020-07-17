@@ -11,62 +11,54 @@ return elements in First In First Out order.
    implementing a Queue?
 
    While arrays can pop or push to the end of the list in constant time, removing or adding
-   to the start of the list requires an entire re-indexing of the list is linear operation. 
-   A singly linked list on the hand excels at adding or removing for the start of a list 
-   because the number of operations is the same no matter how large the list. Therefore a 
-   singly linked list would be a better use for queue since it can perform all the operations
-   of a queue in 0(1) constant time.
+   to the start of the list requires an entire re-indexing of the list and is a linear 
+   operation. A singly linked list on the hand excels at adding or removing from the start of 
+   a list because the number of operations is the same no matter how large the data set. 
+   Therefore a singly linked list would be a better use for queue since it can perform all 
+   the operations of a queue in 0(1) constant time.
    
 Stretch: What if you could only use instances of your Stack class to implement the Queue?
          What would that look like? How many Stacks would you need? Try it!
 """
+from singly_linked_list import LinkedList
 
+# Implementation of a queue using an array
+# class Queue:
+#     def __init__(self):
+#         self.size = 0
+#         self.storage = []
 
-class Node:
-    def __init__(self, value, next_node=None):
-        self.value = value
-        self.next_node = next_node
+#     def __len__(self):
+#         return self.size
+
+#     def enqueue(self, value):
+#         self.size += 1
+#         self.storage.append(value)
+#         return self.storage[len(self.storage) - 1]
+
+#     def dequeue(self):
+#         if self.size > 0:
+#             self.size -= 1
+#             return self.storage.pop(0)
+#         else:
+#             return None
 
 
 class Queue:
-    def __init__(self, head=None, tail=None):
-        self.head = head
-        self.tail = tail
+    def __init__(self):
         self.size = 0
+        self.storage = LinkedList()
 
     def __len__(self):
         return self.size
 
     def enqueue(self, value):
-        new_node = Node(value)
-        if self.size == 0:
-            self.head = new_node
-            self.tail = new_node
-        else:
-            self.tail.next_node = new_node
-            self.tail = new_node
         self.size += 1
-        return f"{self.tail.value} is #{self.size} in line"
+        return self.storage.add_to_head(value)
 
     def dequeue(self):
         if self.size == 0:
             return None
-
-        removed_node = self.head
-        if self.size == 1:
-            self.head = None
-            self.tail = None
         else:
-            self.head = removed_node.next_node
-            removed_node.next_node = None
-        self.size -= 1
-        return removed_node.value
-
-    def peek(self):
-        return self.head.value
-
-
-queue = Queue()
-queue.enqueue(1)
-print(queue.dequeue())
-print(queue.size)
+            self.size -= 1
+            return self.storage.remove_head()
