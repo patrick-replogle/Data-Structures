@@ -39,8 +39,7 @@ class Stack:
         if self.size > 0:
             self.size -= 1
             return self.storage.remove_tail()
-        else:
-            return None
+        return None
 
 # Implementation of a stack using an array for data storage
 # class Stack:
