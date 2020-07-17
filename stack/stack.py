@@ -20,26 +20,6 @@ return elements in Last In First Out order.
    for a stack.
 """
 from singly_linked_list import LinkedList
-# Implementation of a stack using an array for data storage
-# class Stack:
-#     def __init__(self):
-#         self.size = 0
-#         self.storage = []
-
-#     def __len__(self):
-#         return self.size
-
-#     def push(self, value):
-#         self.storage.append(value)
-#         self.size += 1
-#         return self.storage[len(self.storage) - 1]
-
-#     def pop(self):
-#         if self.size > 0:
-#             self.size -= 1
-#             return self.storage.pop(len(self.storage) - 1)
-#         else:
-#             return None
 
 
 class Stack:
@@ -61,3 +41,24 @@ class Stack:
             return self.storage.remove_tail()
         else:
             return None
+
+# Implementation of a stack using an array for data storage
+# class Stack:
+#     def __init__(self):
+#         self.size = 0
+#         self.storage = []
+
+#     def __len__(self):
+#         return self.size
+
+#     def push(self, value):
+#         self.storage.append(value)
+#         self.size += 1
+#         return self.storage[len(self.storage) - 1]
+
+#     def pop(self):
+#         if self.size > 0:
+#             self.size -= 1
+#             return self.storage.pop(len(self.storage) - 1)
+#         else:
+#             return None
