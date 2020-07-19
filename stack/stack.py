@@ -9,15 +9,6 @@ return elements in Last In First Out order.
    Make sure the Stack tests pass.
 3. What is the difference between using an array vs. a linked list when 
    implementing a Stack?
-
-   An array is far more efficient at implementing a stack since it can both push and 
-   pop in constant time. While a singly linked list can easily push a new value to the 
-   list, in order to pop from the end you must also have access to the previous node 
-   in order to reset the tail and cut it's link to the removed tail. This requires 
-   looping thru the list and also further adding space complexity by storing 
-   the current node and previous node in memory while looping.  Therefore popping is 
-   a linear action and has an O(n) time complexity, making the array a better choice 
-   for a stack.
 """
 from singly_linked_list import LinkedList
 
@@ -33,12 +24,12 @@ class Stack:
 
     def push(self, value):
         self.size += 1
-        return self.storage.add_to_tail(value)
+        return self.storage.add_to_head(value)
 
     def pop(self):
         if self.size > 0:
             self.size -= 1
-            return self.storage.remove_tail()
+            return self.storage.remove_head()
         return None
 
 # Implementation of a stack using an array for data storage

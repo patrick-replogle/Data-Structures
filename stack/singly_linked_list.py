@@ -50,8 +50,8 @@ class LinkedList:
             self.head = new_node
             self.tail = new_node
         else:
-            self.tail.next_node = new_node
-            self.tail = new_node
+            new_node.next_node = self.head
+            self.head = new_node
         self.size += 1
 
     def remove_head(self):
