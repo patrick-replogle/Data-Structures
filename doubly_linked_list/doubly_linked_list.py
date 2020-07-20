@@ -15,7 +15,7 @@ class ListNode:
 
 
 """
-Our doubly-linked list class. It holds references to 
+Our doubly-linked list class. It holds references to
 the list's head and tail nodes.
 """
 
@@ -30,8 +30,8 @@ class DoublyLinkedList:
         return self.length
 
     """
-    Wraps the given value in a ListNode and inserts it 
-    as the new head of the list. Don't forget to handle 
+    Wraps the given value in a ListNode and inserts it
+    as the new head of the list. Don't forget to handle
     the old head node's previous pointer accordingly.
     """
 
@@ -66,8 +66,8 @@ class DoublyLinkedList:
         return removed_node
 
     """
-    Wraps the given value in a ListNode and inserts it 
-    as the new tail of the list. Don't forget to handle 
+    Wraps the given value in a ListNode and inserts it
+    as the new tail of the list. Don't forget to handle
     the old tail node's next pointer accordingly.
     """
 
@@ -83,7 +83,7 @@ class DoublyLinkedList:
         self.length += 1
 
     """
-    Removes the List's current tail node, making the 
+    Removes the List's current tail node, making the
     current tail's previous node the new tail of the List.
     Returns the value of the removed Node.
     """
@@ -103,25 +103,29 @@ class DoublyLinkedList:
         return removed_node
 
     """
-    Removes the input node from its current spot in the 
+    Removes the input node from its current spot in the
     List and inserts it as the new head node of the List.
     """
 
     def move_to_front(self, node):
+        if node is self.head:
+            return None
         self.delete(node)
         self.add_to_head(node.value)
 
     """
-    Removes the input node from its current spot in the 
+    Removes the input node from its current spot in the
     List and inserts it as the new tail node of the List.
     """
 
     def move_to_end(self, node):
+        if node is self.tail:
+            return None
         self.delete(node)
         self.add_to_tail(node.value)
 
     """
-    Deletes the input node from the List, preserving the 
+    Deletes the input node from the List, preserving the
     order of the other elements of the List.
     """
 
@@ -137,20 +141,20 @@ class DoublyLinkedList:
 
         else:
             current = self.head
-            prev = None
-            next = None
+            prev = current.prev
+            next = current.next
             while current.next is not None:
                 if current == node:
                     prev.next = current.next
                     next.prev = prev
+                    self.length -= 1
+                    return current.value
                 prev = current
                 current = current.next
                 next = current.next
-            self.length -= 1
-            return current
         return None
     """
-    Finds and returns the maximum value of all the nodes 
+    Finds and returns the maximum value of all the nodes
     in the List.
     """
 
@@ -159,7 +163,7 @@ class DoublyLinkedList:
             return None
         else:
             current_node = self.head
-            maximum_value = 0
+            maximum_value = self.head.value
             while current_node is not None:
                 if current_node.value > maximum_value:
                     maximum_value = current_node.value
