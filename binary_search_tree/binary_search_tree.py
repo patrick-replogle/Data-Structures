@@ -9,6 +9,7 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+from collections import deque
 
 
 class BSTNode:
@@ -19,17 +20,15 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        new_node = BSTNode(value)
-
         if value < self.value:
             if self.left is None:
-                self.left = new_node
+                self.left = BSTNode(value)
             else:
                 self.left.insert(value)
 
         if value >= self.value:
             if self.right is None:
-                self.right = new_node
+                self.right = BSTNode(value)
             else:
                 self.right.insert(value)
 
@@ -42,12 +41,14 @@ class BSTNode:
         if target < self.value:
             if self.left is None:
                 return False
-            return self.left.contains(target)
+            else:
+                return self.left.contains(target)
 
         if target > self.value:
             if self.right is None:
                 return False
-            return self.right.contains(target)
+            else:
+                return self.right.contains(target)
 
     # Return the maximum value found in the tree
 
@@ -58,8 +59,9 @@ class BSTNode:
             return self.right.get_max()
 
     # Call the function `fn` on the value of each node
+
     def for_each(self, fn):
-        self.value = fn(self.value)
+        fn(self.value)
 
         if self.left is not None:
             self.left.for_each(fn)
@@ -67,21 +69,72 @@ class BSTNode:
         if self.right is not None:
             self.right.for_each(fn)
 
+    def iterative_depth_first_for_each(self, fn):
+        # DFT: LIFO
+        # we'll use a stack
+        stack = []
+        stack.append(self)
+
+        while len(stack) > 0:
+            # pop the top node from the stack
+            current = stack.pop()
+            # add the current node's right child first
+            if current.right:
+                stack.append(current.right)
+            # add the current node's left child
+            if current.left:
+                stack.append(current.left)
+
+            # call anonymous function
+            fn(current.value)
+
+    def iterative_breadth_first_for_each(self, fn):
+        # BFS: FIFO
+        # we'll use a queue to facilitate ordering
+        queue = deque()
+        queue.append(self)
+
+        while len(queue) > 0:
+            current = queue.popleft()
+
+            if current.left:
+                queue.append(current.left)
+
+            if current.right:
+                queue.append(current.right)
+
+            fn(current.value)
     # Part 2 -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
-
     def in_order_print(self, node):
-        pass
+        if self.left:
+            self.left.in_order_print(self.left)
+
+        print(self.value)
+
+        if self.right:
+            self.right.in_order_print(self.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
+
     def bft_print(self, node):
-        pass
+        queue = []
+        queue.append(node)
+
+        while len(queue) > 0:
+            current = queue.pop(0)
+            if current.left:
+                queue.append(current.left)
+            if current.right:
+                queue.append(current.right)
+            print(current.value)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
+
     def dft_print(self, node):
         pass
 
@@ -97,6 +150,13 @@ class BSTNode:
         pass
 
 
-bst = BSTNode(10)
+bst = BSTNode(1)
+bst.insert(8)
+bst.insert(5)
+bst.insert(7)
+bst.insert(6)
+bst.insert(3)
+bst.insert(4)
+bst.insert(2)
 
-bst.insert(9)
+bst.bft_print(bst)
