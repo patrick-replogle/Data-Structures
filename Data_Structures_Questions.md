@@ -60,13 +60,13 @@ Answer the following questions for each of the data structures you implemented a
 
 ## Binary Search Tree
 
-1. What is the runtime complexity of `insert`?
+1. What is the runtime complexity of `insert`? average = o(log n), worst case = o(n)
 
-2. What is the runtime complexity of `contains`?
+2. What is the runtime complexity of `contains`? average = o(log n), worst case = o(n)
 
-3. What is the runtime complexity of `get_max`?
+3. What is the runtime complexity of `get_max`? average = o(log n), worst case = o(n)
 
-4. What is the runtime complexity of `for_each`?
+4. What is the runtime complexity of `for_each`? o(n)
 
 ## Heap
 

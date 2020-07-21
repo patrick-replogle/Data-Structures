@@ -64,8 +64,8 @@ class BSTNode:
         if self.left is not None:
             self.left.for_each(fn)
 
-        if self.right is None:
-            self.left.for_each(fn)
+        if self.right is not None:
+            self.right.for_each(fn)
 
     # Part 2 -----------------------
 
