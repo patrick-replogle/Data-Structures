@@ -30,27 +30,33 @@ Answer the following questions for each of the data structures you implemented a
 
 ## Doubly Linked List
 
-1. What is the runtime complexity of `ListNode.insert_after`?
+1.  What is the runtime complexity of `ListNode.insert_after`? o(1)
 
-2. What is the runtime complexity of `ListNode.insert_before`?
+2.  What is the runtime complexity of `ListNode.insert_before`? o(1)
 
-3. What is the runtime complexity of `ListNode.delete`?
+3.  What is the runtime complexity of `ListNode.delete`? o(1)
 
-4. What is the runtime complexity of `DoublyLinkedList.add_to_head`?
+4.  What is the runtime complexity of `DoublyLinkedList.add_to_head`? o(1)
 
-5. What is the runtime complexity of `DoublyLinkedList.remove_from_head`?
+5.  What is the runtime complexity of `DoublyLinkedList.remove_from_head`? o(1)
 
-6. What is the runtime complexity of `DoublyLinkedList.add_to_tail`?
+6.  What is the runtime complexity of `DoublyLinkedList.add_to_tail`? o(1)
 
-7. What is the runtime complexity of `DoublyLinkedList.remove_from_tail`?
+7.  What is the runtime complexity of `DoublyLinkedList.remove_from_tail`? o(1)
 
-8. What is the runtime complexity of `DoublyLinkedList.move_to_front`?
+8.  What is the runtime complexity of `DoublyLinkedList.move_to_front`?
+    o(1) if you know the placement of the node, otherwise o(n) if you must search for the node first.
 
-9. What is the runtime complexity of `DoublyLinkedList.move_to_end`?
+9.  What is the runtime complexity of `DoublyLinkedList.move_to_end`?
+    o(1) if you know the placement of the node, otherwise o(n) if you must search for node first.
 
 10. What is the runtime complexity of `DoublyLinkedList.delete`?
+    o(1) if you know the placement of the node, otherwise o(n) if you must search for node first.
 
-    a. Compare the runtime of the doubly linked list's `delete` method with the worst-case runtime of the JS `Array.splice` method. Which method generally performs better?
+        a. Compare the runtime of the doubly linked list's `delete` method with the worst-case runtime of the JS `Array.splice` method. Which method generally performs better?
+
+        DLL = o(1) if you know the placement of the node, otherwise o(n) if you must search for node first.
+        Array.splice worst case will be o(n) since elements will need to be re-indexed.
 
 ## Binary Search Tree
 
