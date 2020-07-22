@@ -144,6 +144,7 @@ class BSTNode:
 
         while len(stack) > 0:
             current = stack.pop()
+
             if current.right:
                 stack.append(current.right)
 
