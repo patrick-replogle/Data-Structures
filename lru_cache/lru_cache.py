@@ -1,3 +1,6 @@
+from doubly_linked_list import DoublyLinkedList
+
+
 class LRUCache:
     """
     Our LRUCache class keeps track of the max number of nodes it
@@ -6,8 +9,12 @@ class LRUCache:
     order, as well as a storage dict that provides fast access
     to every node stored in the cache.
     """
+
     def __init__(self, limit=10):
-        pass
+        self.limit = limit
+        self.cache = DoublyLinkedList()
+        self.size = 0
+        self.dict = {}
 
     """
     Retrieves the value associated with the given key. Also
@@ -16,8 +23,14 @@ class LRUCache:
     Returns the value associated with the key or None if the
     key-value pair doesn't exist in the cache.
     """
+
     def get(self, key):
-        pass
+        if key in self.dict:
+            value = self.dict[key]
+            self.cache.move_to_end({key: value})
+            return value
+        else:
+            return None
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -29,5 +42,38 @@ class LRUCache:
     want to overwrite the old value associated with the key with
     the newly-specified value.
     """
+
     def set(self, key, value):
-        pass
+        if self.size == 0:
+            self.cache.add_to_head({key: value})
+            self.dict[key] = value
+            self.size += 1
+
+        elif key in self.dict:
+            deleted = self.cache.delete({key: value})
+            self.cache.add_to_tail({key: value})
+            self.dict[key] = value
+
+        elif self.size < self.limit and not key in self.dict:
+            self.cache.add_to_tail({key: value})
+            self.dict[key] = value
+            self.size += 1
+
+        elif self.size >= self.limit:
+            deleted = self.cache.remove_from_head()
+            old_key = None
+            for k, v in deleted.items():
+                old_key = k
+            del self.dict[old_key]
+            self.cache.add_to_tail({key: value})
+            self.dict[key] = value
+
+
+lru = LRUCache(3)
+lru.set('item1', 'a')
+lru.set('item2', 'b')
+lru.set('item3', 'c')
+lru.set('item3', 'd')
+lru.set('item4', 'd')
+
+lru.get('item3')
