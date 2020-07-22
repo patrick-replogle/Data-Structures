@@ -13,7 +13,6 @@ class LRUCache:
     def __init__(self, limit=10):
         self.limit = limit
         self.cache = DoublyLinkedList()
-        self.size = 0
         self.dict = {}
 
     """
@@ -44,36 +43,22 @@ class LRUCache:
     """
 
     def set(self, key, value):
-        if self.size == 0:
+        if self.cache.length == 0:
             self.cache.add_to_head({key: value})
             self.dict[key] = value
-            self.size += 1
 
         elif key in self.dict:
-            deleted = self.cache.delete({key: value})
+            self.cache.delete({key: value})
             self.cache.add_to_tail({key: value})
             self.dict[key] = value
 
-        elif self.size < self.limit and not key in self.dict:
+        elif self.cache.length < self.limit and not key in self.dict:
             self.cache.add_to_tail({key: value})
             self.dict[key] = value
-            self.size += 1
 
-        elif self.size >= self.limit:
+        elif self.cache.length >= self.limit:
             deleted = self.cache.remove_from_head()
-            old_key = None
-            for k, v in deleted.items():
-                old_key = k
-            del self.dict[old_key]
+            deleted_key = [*deleted][0]
+            del self.dict[deleted_key]
             self.cache.add_to_tail({key: value})
             self.dict[key] = value
-
-
-lru = LRUCache(3)
-lru.set('item1', 'a')
-lru.set('item2', 'b')
-lru.set('item3', 'c')
-lru.set('item3', 'd')
-lru.set('item4', 'd')
-
-lru.get('item3')
