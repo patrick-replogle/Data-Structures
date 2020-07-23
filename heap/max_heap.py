@@ -45,21 +45,22 @@ class Heap:
             self.storage[parent_index] = current_node
             self.storage[index] = parent_node
             # move the index to the parent index to start the loop over
-            # and compare the new current value to it's parent value
+            # to compare the new current value to it's parent value
             index = parent_index
 
     def _sift_down(self, index):
         # index will start at 0 the first call
         max_index = index
-        # store left child and right child index's of the max index
+        # store left child and right child index's of the parent index
         left_index = 2 * index + 1
         right_index = 2 * index + 2
-
+        # make sure the left child exists
         if left_index < self.get_size():
             if self.storage[left_index] > self.storage[max_index]:
                 max_index = left_index
-
+        # make sure the left child exists
         if right_index < self.get_size():
+            # compare storage
             if self.storage[right_index] > self.storage[max_index]:
                 max_index = right_index
         # check if max index is no longed the passed in index and
