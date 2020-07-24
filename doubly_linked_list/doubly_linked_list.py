@@ -141,17 +141,13 @@ class DoublyLinkedList:
 
         else:
             current = self.head
-            prev = current.prev
-            next = current.next
             while current.next is not None:
                 if current == node:
-                    prev.next = current.next
-                    next.prev = prev
+                    current.prev.next = current.next
+                    current.next.prev = current.prev
                     self.length -= 1
                     return current.value
-                prev = current
                 current = current.next
-                next = current.next
         return None
     """
     Finds and returns the maximum value of all the nodes
