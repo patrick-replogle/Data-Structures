@@ -25,11 +25,11 @@ class LinkedList:
             return None
 
         elif self.size == 1:
-            removed_node = self.tail
+            removed_node = self.tail.value
             self.head = None
             self.tail = None
             self.size = 0
-            return removed_node.value
+            return removed_node
 
         else:
             previous_node = None

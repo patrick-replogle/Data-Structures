@@ -10,40 +10,6 @@ class LinkedList:
         self.tail = tail
         self.size = 0
 
-    def add_to_tail(self, value):
-        new_node = Node(value)
-        if self.head is None and self.tail is None:
-            self.head = new_node
-            self.tail = new_node
-        else:
-            self.tail.next_node = new_node
-            self.tail = new_node
-        self.size += 1
-
-    def remove_tail(self):
-        if self.head is None and self.tail is None:
-            return None
-
-        elif self.size == 1:
-            removed_node = self.tail
-            self.head = None
-            self.tail = None
-            self.size = 0
-            return removed_node.value
-
-        else:
-            previous_node = None
-            current_node = self.head
-            while(current_node):
-                if current_node.value == self.tail.value:
-                    self.tail = previous_node
-                    previous_node.next_node = None
-                    self.size -= 1
-                    return current_node.value
-                else:
-                    previous_node = current_node
-                    current_node = current_node.next_node
-
     def add_to_head(self, value):
         new_node = Node(value)
         if self.head is None and self.tail is None:
@@ -67,6 +33,40 @@ class LinkedList:
             removed_node.next_node = None
         self.size -= 1
         return removed_node.value
+
+    def add_to_tail(self, value):
+        new_node = Node(value)
+        if self.head is None and self.tail is None:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.tail.next_node = new_node
+            self.tail = new_node
+        self.size += 1
+
+    def remove_tail(self):
+        if self.head is None and self.tail is None:
+            return None
+
+        elif self.size == 1:
+            removed_node = self.tail.value
+            self.head = None
+            self.tail = None
+            self.size = 0
+            return removed_node
+
+        else:
+            previous_node = None
+            current_node = self.head
+            while(current_node):
+                if current_node.value == self.tail.value:
+                    self.tail = previous_node
+                    previous_node.next_node = None
+                    self.size -= 1
+                    return current_node.value
+                else:
+                    previous_node = current_node
+                    current_node = current_node.next_node
 
     def contains(self, value):
         current_node = self.head
