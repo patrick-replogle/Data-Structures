@@ -26,12 +26,12 @@ class Queue:
 
     def enqueue(self, value):
         self.size += 1
-        return self.storage.add_to_head(value)
+        return self.storage.add_to_tail(value)
 
     def dequeue(self):
         if self.size > 0:
             self.size -= 1
-            return self.storage.remove_tail()
+            return self.storage.remove_head()
         return None
 
 # Implementation of a queue using an array
